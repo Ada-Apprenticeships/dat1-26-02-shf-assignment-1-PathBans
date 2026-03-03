@@ -21,8 +21,18 @@ VALUES
         'Monthly membership fee'
     );
 
--- 2.2 
-SELECT strftime('%m',payment_date) AS month, SUM(amount) AS total_revenue FROM payments GROUP BY month;
+-- 2.2
+--Using strftime to extract month and then using the LIKE statement to check if month is 01,02, 11 or 12 as specified
+SELECT
+    strftime ('%m', payment_date) AS month,
+    SUM(amount) AS total_revenue
+FROM
+    payments
+WHERE
+    month LIKE '_1'
+    or month LIKE '_2'
+GROUP BY
+    month;
 
 -- 2.3 
 SELECT

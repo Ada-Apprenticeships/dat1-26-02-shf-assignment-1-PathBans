@@ -26,6 +26,7 @@ FROM
     members AS total_members;
 
 -- 1.4
+--Ordering via descending and then limiting to 1 to get the top most value
 SELECT
     members.member_id,
     members.first_name,
@@ -44,6 +45,7 @@ LIMIT
     1;
 
 -- 1.5
+--Same logic as 1.4 just with ascending ordering to get bottom value
 SELECT
     members.member_id,
     members.first_name,
@@ -62,7 +64,7 @@ LIMIT
     1;
 
 -- 1.6
---I use HAVING to check if the count of 'Registered' values of a member id is bigger than 2.
+--Using a HAVING statement to check if the count of 'Registered' values of a member id is bigger than 2.
 SELECT
     Count(member_id) AS Count
 FROM
