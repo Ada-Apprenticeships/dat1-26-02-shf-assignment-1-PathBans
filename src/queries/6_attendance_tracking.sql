@@ -25,5 +25,20 @@ FROM
 WHERE
     member_id = 5;
 
--- 6.3 
+-- 6.3
+--Using strftime to extract the day of the week as a number
+SELECT
+    strftime ('%w', check_in_time) AS day_of_week,
+    COUNT(attendance_id) as visit_count
+FROM
+    attendance
+GROUP BY
+    day_of_week
+ORDER BY
+    visit_count DESC
+LIMIT
+    1;
+
 -- 6.4
+SELECT DISTINCT l.name, (SELECT COUNT(strftime('%w', check_in_time)) FROM attendance) AS avg_daily_attendance FROM attendance AS a 
+INNER JOIN locations as l ON l.location_id = a.location_id;

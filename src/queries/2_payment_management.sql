@@ -22,13 +22,9 @@ VALUES
     );
 
 -- 2.2 
-SELECT
-    month,
-    SUM(amount) AS total_revenue
-FROM
-    payments
-WHERE
-    -- 2.3 
+SELECT strftime('%m',payment_date) AS month, SUM(amount) AS total_revenue FROM payments GROUP BY month;
+
+-- 2.3 
 SELECT
     payment_id,
     amount,
