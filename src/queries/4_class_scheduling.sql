@@ -43,14 +43,17 @@ WHERE
     AND schedule_id = 7;
 
 -- 4.5
+--Using 3 tables to get relevant data, WHERE and GROUP BY prevent duplicate values
 SELECT
     cs.class_id,
     c.name AS class_name,
-    COUNT(DISTINCT a.attendance_status = 'Registered') AS registration_count
+    COUNT(a.attendance_status) AS registration_count
 FROM
     class_schedule AS cs
     INNER JOIN classes AS c ON cs.class_id = c.class_id
     INNER JOIN class_attendance AS a ON cs.schedule_id = a.schedule_id
+WHERE
+    a.attendance_status = 'Registered'
 GROUP BY
     cs.class_id
 ORDER BY

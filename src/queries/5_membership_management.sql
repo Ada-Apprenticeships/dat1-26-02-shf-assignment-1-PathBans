@@ -14,7 +14,21 @@ FROM
 WHERE
     ms.status = 'Active';
 
--- 5.2 
+-- 5.2
+--Using unixepoch to get difference between times in seconds and then dividing by 60 to get value in minutes
+SELECT
+    m.type AS membership_type,
+    AVG(
+        (
+            unixepoch (a.check_out_time) - unixepoch (a.check_in_time)
+        ) / 60
+    ) AS avg_visit_duration_minutes
+FROM
+    memberships AS m
+    INNER JOIN attendance AS a ON m.member_id = a.member_id
+GROUP BY
+    membership_type;
+
 -- 5.3 
 SELECT
     m.member_id,
@@ -23,7 +37,7 @@ SELECT
     m.email,
     ms.end_date
 FROM
-    members as m
-    INNER JOIN memberships as ms ON m.member_id = ms.member_id
+    members AS m
+    INNER JOIN memberships AS ms ON m.member_id = ms.member_id
 WHERE
     ms.end_date LIKE '2025-__-__';
