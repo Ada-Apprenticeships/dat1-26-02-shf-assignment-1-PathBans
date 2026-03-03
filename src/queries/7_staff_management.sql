@@ -14,7 +14,7 @@ ORDER BY
     role;
 
 -- 7.2
---Similiar logic to 1.6 using HAVING and GROUP BY
+--Same logic to 1.6 using HAVING and GROUP BY
 SELECT
     s.staff_id AS trainer_id,
     s.first_name AS trainer_name,

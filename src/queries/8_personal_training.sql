@@ -1,7 +1,8 @@
 .open fittrackpro.db
 .mode column
 
--- 8.1 
+-- 8.1
+--Using both names to get staff id to be a more robust solution in case another Ivy or Irwin was added 
 SELECT
     p.session_id,
     m.first_name AS member_name,
