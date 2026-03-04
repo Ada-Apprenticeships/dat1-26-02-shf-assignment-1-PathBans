@@ -40,11 +40,20 @@ LIMIT
     1;
 
 -- 6.4
-SELECT l.name AS location_name,AVG(a.attendance_id) AS avg FROM locations AS l 
-INNER JOIN attendance AS a ON l.location_id = a.location_id
-GROUP BY l.location_id, strftime('%w', a.check_in_time);
-
-COUNT(a.attendance_id) GROUP BY strftime('%w', check_in_time)
-AVG(COUNT(a.attendance_id) GROUP BY strftime('%w', check_in_time))
-SELECT DISTINCT l.name, (SELECT COUNT(strftime('%w', check_in_time)) FROM attendance) AS avg_daily_attendance FROM attendance AS a 
-INNER JOIN locations as l ON l.location_id = a.location_id;
+--Using strftime to get the date,in YY-MM-DD format
+SELECT
+    l.name AS location_name,
+    AVG(d.count) as avg_daily_attendance
+FROM
+    (
+        SELECT
+            location_id,
+            strftime ('%Y-%m-%d', check_in_time) AS day,
+            COUNT(location_id) AS count
+        FROM
+            attendance
+        GROUP BY
+            location_id,
+            day
+    ) AS d
+    INNER JOIN locations AS l ON l.location_id = d.location_id;

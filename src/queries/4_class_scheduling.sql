@@ -59,15 +59,18 @@ GROUP BY
 ORDER BY
     registration_count DESC;
 
--- 4.6 
+-- 4.6
+--Checking for attendance status as it can also be unattended - although this isn't the case in the sample data
 SELECT
-    COUNT(member_id)
+    AVG(Count) AS avg_class_per_member
 FROM
-    members
-WHERE
-    member_id IN (
+    (
         SELECT
-            member_id
+            Count(member_id) AS Count
         FROM
             class_attendance
+        WHERE
+            attendance_status IN ('Registered', 'Attended')
+        GROUP BY
+            member_id
     );
