@@ -29,7 +29,8 @@ SELECT
 FROM
     payments
 WHERE
-    month LIKE '_1'
+    payment_type = 'Monthly membership fee'
+    AND month LIKE '_1'
     or month LIKE '_2'
 GROUP BY
     month;
