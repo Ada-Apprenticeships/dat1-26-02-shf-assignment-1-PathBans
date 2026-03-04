@@ -2,10 +2,11 @@
 .mode column
 
 -- 8.1
---Using both names to get staff id to be a more robust solution in case another Ivy or Irwin was added 
+--Using both names to select staff id to be a more robust solution in case another Ivy or Irwin was added
+--Using concatenation to combine names for members
 SELECT
     p.session_id,
-    m.first_name AS member_name,
+    m.first_name || ' ' || m.last_name AS member_name,
     p.session_date,
     p.start_time,
     p.end_time

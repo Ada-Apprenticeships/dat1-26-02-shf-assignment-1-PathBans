@@ -2,11 +2,11 @@
 .mode column
 
 -- 4.1
---Use distinct to prevent classes being repeated
+--Use distinct to prevent classes being repeated, and concatenation for name
 SELECT DISTINCT
     cs.class_id,
     c.name AS class_name,
-    s.first_name AS instructor_name
+    s.first_name || ' ' || s.last_name AS instructor_name
 FROM
     class_schedule AS cs
     INNER JOIN classes AS c ON cs.class_id = c.class_id
@@ -62,7 +62,7 @@ ORDER BY
 -- 4.6
 --Checking for attendance status as it can also be unattended - although this isn't the case in the sample data
 SELECT
-    AVG(Count) AS avg_class_per_member
+    AVG(Count) AS avg_classes_per_member
 FROM
     (
         SELECT

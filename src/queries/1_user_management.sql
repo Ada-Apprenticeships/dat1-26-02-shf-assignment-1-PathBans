@@ -64,14 +64,19 @@ LIMIT
     1;
 
 -- 1.6
---Using a HAVING statement to check if the count of 'Registered' values of a member id is bigger than 2.
+--Using a HAVING statement to check if the count of 'Attended' values of a member id is bigger than 2.
 SELECT
     Count(member_id) AS Count
 FROM
-    class_attendance
-WHERE
-    attendance_status = 'Registered'
-GROUP BY
-    member_id
-HAVING
-    Count(attendance_status) >= 2;
+    (
+        SELECT
+            member_id
+        FROM
+            class_attendance
+        WHERE
+            attendance_status = 'Attended'
+        GROUP BY
+            member_id
+        HAVING
+            Count(attendance_status) >= 2
+    );

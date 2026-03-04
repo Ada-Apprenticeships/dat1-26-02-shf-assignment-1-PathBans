@@ -1,7 +1,6 @@
 .open fittrackpro.db
 .mode column
 
-
 -- 7.1 
 SELECT
     staff_id,
@@ -14,10 +13,10 @@ ORDER BY
     role;
 
 -- 7.2
---Same logic to 1.6 using HAVING and GROUP BY
+--Same logic to 1.6 using HAVING and GROUP BY, using concatenation for trainer name
 SELECT
     s.staff_id AS trainer_id,
-    s.first_name AS trainer_name,
+    s.first_name || ' ' || s.last_name AS trainer_name,
     Count(p.session_id) AS session_count
 FROM
     staff AS s
