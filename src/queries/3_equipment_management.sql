@@ -30,11 +30,11 @@ GROUP BY
     equipment_type;
 
 -- 3.3
---Using julianday to arithmetically subtract dates
+--Using julianday to arithmetically subtract dates, from present day to when it was purchased giving the age of equipment
 SELECT
     type as equipment_type,
     AVG(
-        julianday (next_maintenance_date) - julianday (last_maintenance_date)
+        julianday (DATE('now')) - julianday (purchase_date)
     ) as avg_age_days
 FROM
     equipment
